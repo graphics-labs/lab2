@@ -119,7 +119,7 @@ void display(void) {
   glColor3d(1, 0, 1);
   glViewport(400, 400, 400, 400);
   glutSolidCube(3);
-
+  
   glColor3d(1, 1, 1);
   glViewport(0, 400, 400, 400);
   glutSolidSphere(2, 40, 16);
