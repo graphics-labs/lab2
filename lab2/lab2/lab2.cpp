@@ -37,16 +37,17 @@ void init(void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-7, 5, -7, 5, 2, 12);
+    glOrtho(-7, 7, -7, 7, 2, 12);
 
-    gluLookAt(0, 0, 5, 0, 1, 0, 0, 1, 0);
+    gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
     glMatrixMode(GL_MODELVIEW);
 }
 
 void resize(int width, int height) {}
 
 void  display(void) {
-
+    draw_map();
+    
     display_sector_1();
     display_sector_2();
     display_sector_3();
@@ -70,6 +71,8 @@ void draw_map() {
 }
 
 void display_sector_1() {
+    glViewport(400, 400, 400, 400);
+   
 }
 void display_sector_2() {
 
@@ -103,14 +106,38 @@ void display_sector_2() {
     glDisable(GL_LINE_SMOOTH);
 }
 void display_sector_3() {
-    glViewport(0, 0, 400, 400);
+    glViewport(0, 0, 400, 400); // выделили область экрана для отрисовки
     glPointSize(10);
-    glEnable(GL_POINT_SMOOTH);
-    glBegin(GL_POINTS); { // рисуем круглые точки
+    
+    glBegin(GL_POINTS); { // рисуем точки
 
-        glColor3d(255, 255, 0); // желтая круглая
-        glVertex2d(-3, -4);
+        glPointSize(10);
+        glColor3d(255, 0, 0); // красная квадратная
+        glVertex2d(3, 3);
+
+        glColor3d(0, 255, 0); // зеленая квадратная
+        glVertex2d(3, -4);
 
     } glEnd();
+
+    glEnable(GL_POINT_SMOOTH); { // рисуем круглые точки
+        
+        glBegin(GL_POINTS); {
+
+            glColor3d(255, 255, 0); // желтая круглая
+            glVertex2d(-3, 4);
+
+        } glEnd();
+
+        glPointSize(20);
+        glBegin(GL_POINTS); { // рисуем круглые точки
+
+            glColor3d(0, 0, 255); // желтая круглая
+            glVertex2d(-5, -5);
+
+        } glEnd();
+    } glDisable(GL_POINT_SMOOTH);
 }
-void display_sector_4() {}
+void display_sector_4() {
+    glViewport(400, 0, 400, 400);
+}
