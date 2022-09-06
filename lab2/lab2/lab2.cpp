@@ -8,7 +8,7 @@
 
 void init(void);
 void resize(int width, int height);
-void  display(void);
+void display(void);
 void draw_map();
 void display_sector_1();
 void display_sector_2();
@@ -53,39 +53,35 @@ void  display(void) {
     display_sector_3();
     display_sector_4();
     glFlush();
-
 }
 
 void draw_map() {
     glViewport(0, 0, 800, 800);
-    glBegin(GL_LINES); { // рисуем линии
 
-        glColor3d(255, 255, 255); // желтая линия
+    glBegin(GL_LINES); {
+        glColor3d(1, 1, 1);
         glVertex2d(-400, 0);
         glVertex2d(400, 0);
 
         glVertex2d(0, -400);
         glVertex2d(0, 400);
-
     } glEnd();
 }
 
 void display_sector_1() {
     glViewport(400, 400, 400, 400);
-   
 }
-void display_sector_2() {
 
+void display_sector_2() {
     glViewport(0, 400, 400, 400);
     glPointSize(10);
 
     glBegin(GL_LINES); { // рисуем линии
-
-        glColor3d(255, 255, 0); // желтая линия
+        glColor3d(1, 1, 0); // желтая линия
         glVertex2d(-5, -1);
         glVertex2d(4, 5);
 
-        glColor3d(0, 255, 0); // зеленая линия
+        glColor3d(0, 1, 0); // зеленая линия
         glVertex2d(-2, -2);
         glVertex2d(5, 3);
     } glEnd();
@@ -95,12 +91,10 @@ void display_sector_2() {
     glLineStipple(1, 50055);
 
     glBegin(GL_LINE_STRIP); { // рисуем прерывистые линии
-
-        glColor3d(255, 0, 0); // красная прерывистая линия
+        glColor3d(1, 0, 0); // красная прерывистая линия
         glVertex2d(-4, 4);
         glVertex2d(5, -3);
     } glEnd();
-
 
     glDisable(GL_LINE_STIPPLE);
     glDisable(GL_LINE_SMOOTH);
@@ -110,34 +104,54 @@ void display_sector_3() {
     glPointSize(10);
     
     glBegin(GL_POINTS); { // рисуем точки
-
-        glPointSize(10);
-        glColor3d(255, 0, 0); // красная квадратная
+        glColor3d(1, 0, 0); // красная квадратная
         glVertex2d(3, 3);
 
-        glColor3d(0, 255, 0); // зеленая квадратная
+        glColor3d(0, 1, 0); // зеленая квадратная
         glVertex2d(3, -4);
-
     } glEnd();
 
     glEnable(GL_POINT_SMOOTH); { // рисуем круглые точки
-        
         glBegin(GL_POINTS); {
-
-            glColor3d(255, 255, 0); // желтая круглая
+            glColor3d(1, 1, 0); // желтая круглая
             glVertex2d(-3, 4);
-
         } glEnd();
 
         glPointSize(20);
         glBegin(GL_POINTS); { // рисуем круглые точки
-
-            glColor3d(0, 0, 255); // желтая круглая
+            glColor3d(0, 0, 1); // желтая круглая
             glVertex2d(-5, -5);
-
         } glEnd();
     } glDisable(GL_POINT_SMOOTH);
 }
 void display_sector_4() {
     glViewport(400, 0, 400, 400);
+   
+    glBegin(GL_LINE_STRIP); {
+        glColor3d(1, 1, 1);
+
+        glVertex2d(-5, 4);
+        glVertex2d(-3, 5);
+        glVertex2d(-3, 3);
+        glVertex2d(-5, 2);
+        glVertex2d(-2, 5);
+        glVertex2d(-2, 2);
+    } glEnd();
+
+    glBegin(GL_TRIANGLES); {
+        glColor3d(0, 0, 1);
+
+        glVertex2d(2, 4);
+        glVertex2d(4, 5);
+        glVertex2d(2, 5);
+    } glEnd();
+
+    glBegin(GL_QUADS); {
+        glColor3d(1, 0.5, 0);
+
+        glVertex2d(-4, -3);
+        glVertex2d(1, -1);
+        glVertex2d(4, -4);
+        glVertex2d(0, -5);
+    } glEnd();
 }
