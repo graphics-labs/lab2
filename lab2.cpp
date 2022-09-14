@@ -1,5 +1,4 @@
-﻿#include <windows.h>
-#include <GL/gl.h>
+﻿#include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
 
@@ -14,6 +13,7 @@ void display_sector_1();
 void display_sector_2();
 void display_sector_3();
 void display_sector_4();
+void draw_triangle(int x1, int y1, int x2, int y2, int r, int g, int b);
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
@@ -68,6 +68,19 @@ void draw_map() {
     } glEnd();
 }
 
+void draw_triangle(int x1, int y1, int x2, int y2, int r, int g, int b) {
+        
+        glBegin(GL_TRIANGLES); {
+        
+        glColor3d(r, g, b);
+        
+        glVertex2d(0, 0);
+        glVertex2d(x1, y1);
+        glVertex2d(x2, y2);
+
+    } glEnd();
+}
+
 void display_sector_1() {
     glViewport(400, 400, 400, 400);
 
@@ -90,51 +103,12 @@ void display_sector_1() {
         }
     } glEnd();
 
-    glBegin(GL_LINES); {
-
-        glColor3d(1, 0, 0);
-        glVertex2d(0, 0);
-        glVertex2d(3, 0);
-        glVertex2d(0, 0);
-        glVertex2d(3, 2);
-        glVertex2d(3, 0);
-        glVertex2d(3, 2);
-
-        glColor3d(0, 1, 0);
-        glVertex2d(0, 0);
-        glVertex2d(3, 3);
-        glVertex2d(0, 0);
-        glVertex2d(2, 4);
-        glVertex2d(3, 3);
-        glVertex2d(2, 4);
-
-        glColor3d(0, 0, 1);
-        glVertex2d(0, 0);
-        glVertex2d(3, -1);
-        glVertex2d(0, 0);
-        glVertex2d(2, -2);
-        glVertex2d(2, -2);
-        glVertex2d(3, -1);
-
-        glColor3d(0, 1, 1);
-        glVertex2d(0, 0);
-        glVertex2d(1, -3);
-        glVertex2d(1, -3);
-        glVertex2d(2, -2);
-
-
-        glColor3d(1, 1, 0);
-        glVertex2d(3, -1);
-        glVertex2d(3, 0);
-
-
-        glColor3d(1, 1, 1);
-        glVertex2d(3, 2);
-        glVertex2d(3, 3);
-
-
-    } glEnd();
-
+    draw_triangle(2, 4, 3, 3, 1, 0, 0);
+    draw_triangle(3, 3, 3, 2, 0, 1, 0);
+    draw_triangle(3, 2, 3, 0, 0, 0, 1);
+    draw_triangle(3, 0, 3, -1, 1, 0, 0);
+    draw_triangle(3, -1, 2, -2, 0, 1, 0);
+    draw_triangle(2, -2, 1, -3, 0, 0, 1);
 
     glDisable(GL_LINE_STIPPLE);
     glDisable(GL_LINE_SMOOTH);
