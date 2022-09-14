@@ -13,7 +13,8 @@ void display_sector_1();
 void display_sector_2();
 void display_sector_3();
 void display_sector_4();
-void draw_triangle(int x1, int y1, int x2, int y2, int r, int g, int b);
+void draw_triangle(int x1, int y1, int x2, int y2, GLdouble r, GLdouble g, GLdouble b);
+void draw_rectangle(int top, int bottom, int left, int right, GLdouble r, GLdouble g, GLdouble b);
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
@@ -68,7 +69,7 @@ void draw_map() {
     } glEnd();
 }
 
-void draw_triangle(int x1, int y1, int x2, int y2, int r, int g, int b) {
+void draw_triangle(int x1, int y1, int x2, int y2, GLdouble r, GLdouble g, GLdouble b) {
         
         glBegin(GL_TRIANGLES); {
         
@@ -81,27 +82,24 @@ void draw_triangle(int x1, int y1, int x2, int y2, int r, int g, int b) {
     } glEnd();
 }
 
+void draw_rectangle(int top, int bottom, int left, int right, GLdouble r, GLdouble g, GLdouble b) {
+    glBegin(GL_QUADS); {
+        glColor3d(r, g, b);
+
+        glVertex2d(left, top);
+        glVertex2d(right, top);
+        glVertex2d(right, bottom);
+        glVertex2d(left, bottom);
+    } glEnd();
+}
+
 void display_sector_1() {
     glViewport(400, 400, 400, 400);
 
-    glPointSize(10);
-
-    glBegin(GL_LINES); { 
-
-        glColor3d(1, 0, 0); 
-        glVertex2d(-5, 5);
-        glVertex2d(-5, -3);
-
-        glColor3d(1, 0, 0); 
-        glVertex2d(-3, 5);
-        glVertex2d(-3, -3);
-
-        for (int i = 5; i >= -3; i -= 2){
-            glColor3d(1, 0, 0); 
-            glVertex2d(-5, i);
-            glVertex2d(-3, i);
-        }
-    } glEnd();
+    draw_rectangle(5, 3, -5, -3, 0.58, 0.21, 0.13);
+    draw_rectangle(3, 1, -5, -3, 0.24, 0.81, 0.28);
+    draw_rectangle(1, -1, -5, -3, 0.85, 0.11, 0.95);
+    draw_rectangle(-1, -3, -5, -3, 0.71, 0.64, 0.29);
 
     draw_triangle(2, 4, 3, 3, 1, 0, 0);
     draw_triangle(3, 3, 3, 2, 0, 1, 0);
