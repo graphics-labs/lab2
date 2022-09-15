@@ -1,21 +1,21 @@
-.PHONY: all, clean, rebuild, test
+.PHONY: all, clean, rebuild 
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -c
 GLFLAGS = -lglut -lGL -lGLU
 
-PATH = ../build/
+BUILD_PATH = ../build/
 SOURCES =  lab2.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = MAIN
 
-all: $(OBJECTS) 
-	$(CC) $(GLFLAGS) $(OBJECTS) -o $(PATH)$(EXECUTABLE)
+all: $(OBJECTS)
+	$(CC) $(GLFLAGS) $(BUILD_PATH)$(OBJECTS) -o $(BUILD_PATH)$(EXECUTABLE)
 
-rebuild: claen all
+rebuild: clean all
 
-.o: .c
-	$(CC) $(GLFLAGS) $< -o $@
+%.o: %.cpp
+	$(CC) $(CFLAGS) $(GLFLAGS) $< -o $(BUILD_PATH)$@
 
 clean:
-	-rm  $(PATH)*.o
+	-rm  $(BUILD_PATH)*
