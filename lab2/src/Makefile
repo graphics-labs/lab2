@@ -5,7 +5,7 @@ CFLAGS = -c
 GLFLAGS = -lglut -lGL -lGLU
 
 BUILD_PATH = ../build/
-SOURCES =  lab2.cpp
+SOURCES =  lab2_primitives.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = MAIN
 
