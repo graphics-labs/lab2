@@ -10,12 +10,12 @@ OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = MAIN
 
 all: $(OBJECTS)
-	$(CC) $(GLFLAGS) $(BUILD_PATH)$(OBJECTS) -o $(BUILD_PATH)$(EXECUTABLE)
+	$(CC) $(BUILD_PATH)$(OBJECTS) -o $(BUILD_PATH)$(EXECUTABLE) $(GLFLAGS)
 
 rebuild: clean all
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(GLFLAGS) $< -o $(BUILD_PATH)$@
+	$(CC) $(CFLAGS) $< -o $(BUILD_PATH)$@
 
 clean:
 	-rm  $(BUILD_PATH)*
