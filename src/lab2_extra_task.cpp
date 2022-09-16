@@ -48,12 +48,12 @@ void resize(int width, int height) {}
 void display() {
   draw_map();
 
-  draw_rectangle(3.5, 2.5, -5, 5, 0.99, 0.14, 0.29);
-  draw_triangle(3, 2.5, 5, 2.5, 5, 1.25, 0.21, 0.3, 0.46);
+  draw_rectangle(3.5, 2.5, -5, 3, 0.99, 0.14, 0.29);
+  draw_triangle(2, 2.5, 3, 2.5, 3, 1.5, 0.21, 0.3, 0.46);
 
   draw_rectangle(2.5, -5, -3.5, -2, 0.29, 0.81, 0.44);
   draw_triangle(-5, 2.5, -2, 2.5, -2, 1, 0.71, 0.39, 0.126);
-
+  draw_triangle(-3, 2.5, -2, 2.5, -3, 1, 0.34, 0.5, 0.36);
   // -5 -2 start
 
   glColor3d(1, 1, 0);
@@ -67,9 +67,14 @@ void display() {
     for (int i = 1; i < points; i++) {
       angle = M_PI * i / points;
 
-      glVertex2d(cos(angle) - 2, sin(angle) - 5);
+      // glVertex2d((cos(angle) - 2), (sin(angle) - 3));
     }
   }
+
+  float radius = 3;
+  for (float i = 0.0; i <= M_PI; i += 0.001)
+    glVertex2d((sin(i) * radius * 1.9) - 3, (cos(i) * radius) - 2);
+
   glEnd();
 
   // display_sector_1();
