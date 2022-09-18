@@ -56,6 +56,18 @@ void display() {
   draw_triangle(-3, 2.5, -2, 2.5, -3, 1, 0.34, 0.5, 0.36);
   // -5 -2 start
 
+  glColor3d(0, 0, 0);
+
+  glBegin(GL_POLYGON);
+  {
+    float innerRadius = 2.2;
+
+    for (float i = 0.0; i <= M_PI; i+= 0.001)
+      glVertex2d((sin(i) * innerRadius * 2.1) - 3, (cos(i) * innerRadius) - 2);
+  }
+
+  glEnd();
+
   glColor3d(1, 1, 0);
 
   glBegin(GL_POLYGON);
@@ -72,6 +84,7 @@ void display() {
   }
 
   float radius = 3;
+
   for (float i = 0.0; i <= M_PI; i += 0.001)
     glVertex2d((sin(i) * radius * 1.9) - 3, (cos(i) * radius) - 2);
 
