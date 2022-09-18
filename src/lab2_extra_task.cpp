@@ -6,14 +6,29 @@
 
 void init();
 void resize(int width, int height);
-void display();   // отрисовка всего поля
-void draw_map();  // отрисовка разделителей секторов
+void display();
+void draw_map();
 
-void draw_triangle(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2,
-                   GLdouble x3, GLdouble y3, GLdouble r, GLdouble g,
-                   GLdouble b);
-void draw_rectangle(GLdouble top, GLdouble bottom, GLdouble left,
-                    GLdouble right, GLdouble r, GLdouble g, GLdouble b);
+void draw_triangle(
+    GLdouble x1, GLdouble y1,
+    GLdouble x2, GLdouble y2,
+    GLdouble x3, GLdouble y3,
+    GLdouble r, GLdouble g, GLdouble b
+);
+
+void draw_rectangle(
+  GLdouble top, GLdouble bottom,
+  GLdouble left, GLdouble right,
+  GLdouble r, GLdouble g, GLdouble b
+);
+
+void draw_quadrilateral(
+  GLdouble x1, GLdouble y1,
+  GLdouble x2, GLdouble y2,
+  GLdouble x3, GLdouble y3,
+  GLdouble x4, GLdouble y4,
+  GLdouble r, GLdouble g, GLdouble b
+);
 
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
@@ -48,49 +63,63 @@ void resize(int width, int height) {}
 void display() {
   draw_map();
 
-  draw_rectangle(3.5, 2.5, -5, 3, 0.99, 0.14, 0.29);
-  draw_triangle(2, 2.5, 3, 2.5, 3, 1.5, 0.21, 0.3, 0.46);
+  draw_rectangle(
+    2.5, -5,
+    -3.5, -2,
+    1, 1, 1
+  );
 
-  draw_rectangle(2.5, -5, -3.5, -2, 0.29, 0.81, 0.44);
-  draw_triangle(-5, 2.5, -2, 2.5, -2, 1, 0.71, 0.39, 0.126);
-  draw_triangle(-3, 2.5, -2, 2.5, -3, 1, 0.34, 0.5, 0.36);
-  // -5 -2 start
+  draw_rectangle(
+    3.5, 2.5,
+    -5, 3,
+    1, 1, 1
+  );
 
-  glColor3d(0, 0, 0);
+  draw_quadrilateral(
+    -3.5, -3.25,
+    -3.5, -5,
+    -5, -5,
+    -4, -4.4,
+    1,1,1 
+  );
 
+  draw_quadrilateral(
+    -5, 2.5,
+    -4.15, 2.1,
+    -3.5, 1,
+    -3.5, 2.5,
+    1,1,1 
+  );
+
+  draw_quadrilateral(
+    1.8, 2.5,
+    2.5, 2.15,
+    3, 1.5,
+    3, 2.5,
+    1, 1, 1 
+  );
+  
   glBegin(GL_POLYGON);
   {
+    glColor3d(0, 0, 0);
+
     float innerRadius = 2.2;
 
     for (float i = 0.0; i <= M_PI; i+= 0.001)
       glVertex2d((sin(i) * innerRadius * 2.1) - 3, (cos(i) * innerRadius) - 2);
-  }
+  } glEnd();
 
-  glEnd();
-
-  glColor3d(1, 1, 0);
 
   glBegin(GL_POLYGON);
   {
-    // GLdouble x = -5, y = -2;
+    glColor3d(1, 1, 1);
 
-    double angle = 0.0f;
-    int points = 1000;
-    for (int i = 1; i < points; i++) {
-      angle = M_PI * i / points;
+    float radius = 3;
 
-      // glVertex2d((cos(angle) - 2), (sin(angle) - 3));
-    }
-  }
+    for (float i = 0.0; i <= M_PI; i += 0.001)
+      glVertex2d((sin(i) * radius * 1.9) - 3, (cos(i) * radius) - 2);
+  } glEnd();
 
-  float radius = 3;
-
-  for (float i = 0.0; i <= M_PI; i += 0.001)
-    glVertex2d((sin(i) * radius * 1.9) - 3, (cos(i) * radius) - 2);
-
-  glEnd();
-
-  // display_sector_1();
 
   glFlush();
 }
@@ -99,40 +128,69 @@ void draw_map() {
   glViewport(0, 0, 800, 800);
 
   glBegin(GL_LINES);
-  {
-    glColor3d(1, 1, 1);
-    glVertex2d(-400, 0);
-    glVertex2d(400, 0);
 
-    glVertex2d(0, -400);
-    glVertex2d(0, 400);
-  }
+  glColor3d(1, 1, 1);
+
+  glVertex2d(-400, 0);
+  glVertex2d(400, 0);
+
+  glVertex2d(0, -400);
+  glVertex2d(0, 400);
+ 
   glEnd();
 }
 
-void draw_triangle(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2,
-                   GLdouble x3, GLdouble y3, GLdouble r, GLdouble g,
-                   GLdouble b) {
+void draw_triangle(
+  GLdouble x1, GLdouble y1,
+  GLdouble x2, GLdouble y2,
+  GLdouble x3, GLdouble y3,
+  GLdouble r, GLdouble g, GLdouble b
+) {
   glBegin(GL_TRIANGLES);
-  {
-    glColor3d(r, g, b);
-    glVertex2d(x1, y1);
-    glVertex2d(x2, y2);
-    glVertex2d(x3, y3);
-  }
+
+  glColor3d(r, g, b);
+  glVertex2d(x1, y1);
+  glVertex2d(x2, y2);
+  glVertex2d(x3, y3);
+ 
   glEnd();
 }
 
-void draw_rectangle(GLdouble top, GLdouble bottom, GLdouble left,
-                    GLdouble right, GLdouble r, GLdouble g, GLdouble b) {
+void draw_rectangle(
+  GLdouble top, GLdouble bottom,
+  GLdouble left, GLdouble right,
+  GLdouble r, GLdouble g, GLdouble b
+) {
   glBegin(GL_QUADS);
-  {
-    glColor3d(r, g, b);
 
-    glVertex2d(left, top);
-    glVertex2d(right, top);
-    glVertex2d(right, bottom);
-    glVertex2d(left, bottom);
-  }
+  glColor3d(r, g, b);
+
+  glVertex2d(left, top);
+  glVertex2d(right, top);
+  glVertex2d(right, bottom);
+  glVertex2d(left, bottom);
+ 
+  glEnd();
+}
+
+void draw_quadrilateral(
+  GLdouble x1, GLdouble y1,
+  GLdouble x2, GLdouble y2,
+  GLdouble x3, GLdouble y3,
+  GLdouble x4, GLdouble y4,
+  GLdouble r, GLdouble g, GLdouble b
+) {
+  glBegin(GL_TRIANGLES);
+
+  glColor3d(r, g, b);
+
+  glVertex2d(x1, y1);
+  glVertex2d(x2, y2);
+  glVertex2d(x4, y4);
+
+  glVertex2d(x2, y2);
+  glVertex2d(x3, y3);
+  glVertex2d(x4, y4);
+
   glEnd();
 }
